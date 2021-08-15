@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch } from 'react-redux';
+import Map from './components/MapComponent';
+import Table from './components/TableComponent';
+import { setMarkersAction } from './helpers/actionCreators';
 
-function App() {
+import './style/app.scss';
+
+const App: React.FC = () => {
+  const dispatch = useDispatch();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <header><h1>OL & React App</h1></header>
+      <main>
+        <aside className="sidebar">
+          <div
+            className="btn-common btn-marker js-btn-marker"
+            data-text="Добавить точки"
+            data-action="+"
+            onClick={() => dispatch(setMarkersAction())}
+          />
+        </aside>
+
+        <aside className="content">
+          <Map />
+        </aside>
+      </main>
+      <footer>
+        <Table />
+      </footer>
+    </React.Fragment>
   );
-}
+};
 
 export default App;

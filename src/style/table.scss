@@ -1,0 +1,35 @@
+$color-primary: #292929;
+$color-white: white;
+
+.dataTable {
+  min-height: 224px;
+
+  .ant-table {
+    background-color: $color-primary;
+    color: $color-white;
+
+    .ant-table-thead {
+      .ant-table-cell {
+        background-color: $color-primary;
+        color: $color-white;
+      }
+    }
+
+    .ant-table-tbody {
+      tr.ant-table-row {
+        &:hover {
+          td.ant-table-cell {
+            background: #383838;
+
+            cursor: pointer;
+          }
+        }
+  
+        .ant-table-cell {
+          background-color: $color-primary;
+          color: $color-white;
+        }
+      }
+    }
+  }
+}
