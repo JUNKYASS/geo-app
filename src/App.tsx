@@ -3,11 +3,29 @@ import { useDispatch } from 'react-redux';
 import Map from './components/MapComponent';
 import Table from './components/TableComponent';
 import { setMarkersAction } from './helpers/actionCreators';
+import { IExpectedMarkerData } from './helpers/interfaces';
 
 import './style/app.scss';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
+
+  const addMarkersBtnHandler = (): void => { // Получаем данные из /order.json
+    fetch('/orders.json')
+      .then(result => result.json())
+      .then(data => {
+        const processedMarkers = data.Orders.map((marker: IExpectedMarkerData)  => { // Преобразуем в нужный нам вид
+          return {
+            key: marker.key, 
+            name: marker.name, 
+            lat: parseFloat(marker.lat), 
+            lon: parseFloat(marker.lon)
+          };
+        });
+
+        dispatch(setMarkersAction(processedMarkers));
+      });
+  };
 
   return (
     <React.Fragment>
@@ -18,7 +36,7 @@ const App: React.FC = () => {
             className="btn-common btn-marker js-btn-marker"
             data-text="Добавить точки"
             data-action="+"
-            onClick={() => dispatch(setMarkersAction())}
+            onClick={addMarkersBtnHandler}
           />
         </aside>
 

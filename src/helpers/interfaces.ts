@@ -1,5 +1,5 @@
 export interface IPoint {
-  key: number;
+  key: number | string;
   name: string;
   lat: number;
   lon: number; 
@@ -35,4 +35,11 @@ export interface IMapProps {
 
 export interface ITableProps {
   markersData?: IPoint[];
+}
+
+export interface IExpectedMarkerData {
+  key: number; 
+  name: string; 
+  lat: string; 
+  lon: string
 }

@@ -1,0 +1,17 @@
+.input-common {
+  width: 100%;
+  max-width: 400px;
+  height: 64px;
+
+  font-size: 16px;
+
+  background-color: unset;
+  border: 1px solid #7c2222;
+  border-radius: 10px;
+
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: rgb(206, 206, 206);
+  }
+}

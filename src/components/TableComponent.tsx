@@ -38,8 +38,8 @@ const Table: React.FC<ITableProps> = ({ markersData }) => {
     <div className="dataTable">
       <ATable 
         columns={tableColumns}  
-        dataSource={markersData} 
-        pagination={false}
+        dataSource={markersData}
+        pagination={{ pageSize: 10 }} scroll={{ y: 200 }} // УКол-во записей на странице, высота таблицы
         onRow={(record) => {
           return {
             onClick: () => dispatch(setCenterAction(([record.lon, record.lat]))),

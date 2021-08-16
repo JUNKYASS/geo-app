@@ -2,7 +2,8 @@ $color-primary: #292929;
 $color-white: white;
 
 .dataTable {
-  min-height: 224px;
+  min-height: 320px;
+  // overflow: auto;
 
   .ant-table {
     background-color: $color-primary;
