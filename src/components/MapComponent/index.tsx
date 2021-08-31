@@ -12,14 +12,6 @@ import { MeasureArea } from './measureArea';
 import '../../style/map.scss';
 import { IMapProps, IPoint, IRootReducer } from '../../helpers/interfaces';
 
-// /**
-//  * ??? 
-//  * 1. Спросить, почему если я помещяю опеределение
-//  * перменной map в функцию Map, то перестаёт работать отрисовка
-//  * 
-//  * 2. Странно отрисовывается карта в storybook, почему-то появляется только после обновления страницы
-//  */
-
 const view = new View({ // Задаём начальный вью
   center: fromLonLat([37.6204, 55.7475]),
   zoom: 5,
