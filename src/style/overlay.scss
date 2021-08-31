@@ -1,0 +1,139 @@
+.ol-popup {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border: 1px solid #cccccc;
+  bottom: 12px;
+  left: -50px;
+  min-width: 450px;
+  visibility: hidden;
+}
+
+.ol-popup:after,
+.ol-popup:before {
+  top: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.ol-popup:after {
+  border-top-color: white;
+  border-width: 10px;
+  left: 48px;
+  margin-left: -10px;
+}
+
+.ol-popup:before {
+  border-top-color: #cccccc;
+  border-width: 11px;
+  left: 48px;
+  margin-left: -11px;
+}
+
+.ol-popup-closer {
+  text-decoration: none;
+  position: absolute;
+  top: 2px;
+  right: 8px;
+}
+
+.ol-popup-closer:after {
+  content: "x";
+  color: #83a8ec;
+}
+
+.ol-value-name {
+  color: #8e8888;
+}
+
+.ol-value-field {
+  color: #4A4A4A;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.ol-name-value {
+  width: 180px;
+  padding: 3px;
+}
+
+.ol-td-value {
+  width: 300px;
+}
+
+.ol-td-link {
+  text-align: right;
+}
+
+.info-dataContainer {
+  margin: -15px;
+}
+
+.info-element-header-container {
+  padding: 21px;
+  width: 100%;
+}
+
+.info-element-header-title-container {
+  float: left;
+  padding-bottom: 7px;
+}
+
+.info-element-closer-container {
+  width: 20px;
+  float: right;
+}
+
+.info-popup-closer {
+  text-decoration: none;
+}
+
+.info-element-layer {
+  display: inline;
+  margin: 0 5px 10px 10px;
+  vertical-align: top;
+  font-family: ProximaNova;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #6E7478;
+}
+
+.info-element-title {
+  display: inline;
+  margin: 0 5px 10px 0px;
+  vertical-align: top;
+  font-family: ProximaNova;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.info-element-container {
+  border-top: 1px solid #D4D9DC;
+  padding: 12px 0 15px 0;
+  clear: both;
+}
+
+.info-element-inner-container {
+  margin: 0 15px;
+}
+
+.info-element-description {
+  padding-top: 10px;
+}
+
+.info-element-description a {
+  font-family: ProximaNova;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+}

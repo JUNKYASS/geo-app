@@ -31,6 +31,7 @@ export interface IRootReducer {
 export interface IMapProps {
   markers: IPoint[];
   center: number[];
+  caption: string;
 }
 
 export interface ITableProps {

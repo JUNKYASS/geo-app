@@ -1,19 +1,43 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import { Map as OlMap, View, Feature } from 'ol';
-import { Tile, VectorImage } from 'ol/layer';
+import { VectorImage } from 'ol/layer';
 import { Point } from 'ol/geom';
 import { OSM, Vector } from 'ol/source';
 import { fromLonLat } from 'ol/proj';
+import TileLayer from 'ol/layer/Tile';
+import { MeasureArea } from './measureArea';
 
-import '../style/map.scss';
-import { IMapProps, IPoint, IRootReducer } from '../helpers/interfaces';
+import '../../style/map.scss';
+import { IMapProps, IPoint, IRootReducer } from '../../helpers/interfaces';
+
+// /**
+//  * ??? 
+//  * 1. Спросить, почему если я помещяю опеределение
+//  * перменной map в функцию Map, то перестаёт работать отрисовка
+//  * 
+//  * 2. Странно отрисовывается карта в storybook, почему-то появляется только после обновления страницы
+//  */
+
+const view = new View({ // Задаём начальный вью
+  center: fromLonLat([37.6204, 55.7475]),
+  zoom: 5,
+});
+
+const rasterLayer = new TileLayer({ // Основной растровый слой
+  source: new OSM(),
+});
+
+const map = new OlMap({ // Задаём изначальные параметры карты
+  layers: [rasterLayer],
+  view,
+});
 
 const initMap = (map: OlMap, cb: (map: OlMap) => void) => {   // Функция инициализации карты
   map.setTarget('js-map');
 
-  if(cb && typeof cb == 'function') {
+  if (cb && typeof cb == 'function') { // Выполняем переданный колбэк
     cb(map);
   }
 };
@@ -36,32 +60,15 @@ const drawPoints = (map: OlMap, markers: IPoint[]): void => { // Функция 
   map.addLayer(layer);
 };
 
-const view = new View({ // Задаём начальный вью
-  center: fromLonLat([37.6204, 55.7475]),
-  zoom: 5,
-});
-
-const map = new OlMap({ // Задаём изначальные параметры карты
-  layers: [
-    new Tile({
-      source: new OSM(),
-    }),
-  ],
-  view,
-});
-
-/**
- * ??? Спросить, почему если я помещяю опеределение
- *  перменной map в функцию Map, то перестаёт работать отрисовка
- */
-
-const Map: React.FC<IMapProps> = ({markers, center}) => {
+export const Map: React.FC<IMapProps> = ({ markers, center, caption }) => {
   const isFirstRun = useRef(true);
 
   useEffect(() => { // Инициализируем карту в самый первый рендер компонента
     initMap(map, () => {
-      console.log('Карта создана...');
-      return true;
+      console.log('Карта создана...', caption);
+
+      const measureArea = new MeasureArea(map); // Инструмент для измерения площади
+      measureArea.addInteraction();
     });
   }, []);
 
@@ -75,7 +82,7 @@ const Map: React.FC<IMapProps> = ({markers, center}) => {
     } else {
       setTimeout(() => {
         view.animate({ center: fromLonLat(center) });
-        view.animate({ zoom: 10 });
+        view.animate({ zoom: 15 });
       }, 800);
     }
 
@@ -90,7 +97,8 @@ const Map: React.FC<IMapProps> = ({markers, center}) => {
 const mapStateToProps = (state: IRootReducer): IMapProps => { // Берём из стейта то, что нам нужно и отдаём в компонент
   return {
     markers: state.markers.markersData,
-    center: state.center.coords
+    center: state.center.coords,
+    caption: '',
   };
 };
 
